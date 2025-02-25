@@ -1,0 +1,22 @@
+name: "FibBot Workflow"
+
+on:
+  pull_request:
+    paths:
+      - "**/*.md"   # Trigger on markdown file changes, adjust this to your needs
+      - "**/*.rs"
+      - "**/*.cpp"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+
+      - name: Run FibBot Action
+        run: cargo run

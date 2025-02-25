@@ -1,0 +1,14 @@
+name: "FibBot Action"
+description: "Calculates Fibonacci numbers and posts comments in PR"
+inputs:
+  numbers:
+    description: "Comma-separated list of numbers to calculate Fibonacci for"
+    required: true
+    default: "5,8,13"
+  threshold:
+    description: "Maximum Fibonacci number to calculate"
+    required: false
+    default: "20"
+runs:
+  using: "rust"
+  main: "src/main.rs"
