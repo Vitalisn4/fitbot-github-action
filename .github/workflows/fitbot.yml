@@ -1,0 +1,30 @@
+name: FibBot
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  fibonacci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+        with:
+          rust-version: stable
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libssl-dev
+
+      - name: Run FibBot to process PR and comment with Fibonacci results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cargo build --release
+          cargo run --bin fibbot
